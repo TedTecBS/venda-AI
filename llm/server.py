@@ -5,3 +5,8 @@ app = FastAPI()
 @app.get("/")
 async def root():
     return {"service": "llm"}
+
+
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
