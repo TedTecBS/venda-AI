@@ -1,0 +1,25 @@
+# Python caches
+__pycache__/
+*.py[cod]
+
+# Editor files
+*.swp
+
+# Environment files
+.env
+.env.*
+venv/
+.venv/
+
+# Build and cache artifacts
+build/
+dist/
+.cache/
+
+# IDE directories
+.vscode/
+.idea/
+
+# Git
+.git
+.gitignore
