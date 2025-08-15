@@ -1,0 +1,60 @@
+version: "3.9"
+
+services:
+  asr:
+    build: ./asr
+    ports:
+      - "5001:8000"
+    env_file: [.env]
+    volumes:
+      - shared-data:/data
+
+  mt:
+    build: ./mt
+    ports:
+      - "5002:8000"
+    env_file: [.env]
+    volumes:
+      - shared-data:/data
+
+  llm:
+    build: ./llm
+    ports:
+      - "5003:8000"
+    env_file: [.env]
+    volumes:
+      - shared-data:/data
+
+  tts:
+    build: ./tts
+    ports:
+      - "5004:8000"
+    env_file: [.env]
+    volumes:
+      - shared-data:/data
+
+  gateway:
+    build: ./gateway
+    ports:
+      - "8000:8000"
+    env_file: [.env]
+    depends_on:
+      - asr
+      - mt
+      - llm
+      - tts
+    volumes:
+      - shared-data:/data
+
+  web-client:
+    build: ./web-client
+    ports:
+      - "5173:8000"
+    env_file: [.env]
+    depends_on:
+      - gateway
+    volumes:
+      - shared-data:/data
+
+volumes:
+  shared-data:
